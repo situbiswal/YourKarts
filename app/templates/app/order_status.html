@@ -1,0 +1,57 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-3  my-5 position-fixed">
+         <h3>Welcome {{request.user}}</h3>
+         <a href="" class="btn btn-primary px-5">Orders</a>
+         </div>
+        
+        <div class="col-7 offset-3">
+            {% for o in op %}
+            <div class="row mt-5 shadow px-4 pt-4 ">
+                <div class="col-3 pb-4">
+                    <img src="{{o.product.product_img.url}}" alt="" style="width: 150px; height: 150px;">
+                </div>
+                <div class="col-5 mt-4">
+                    <p class="h6">Product: {{o.product.title}}</p>
+                    <p >Quantity: {{o.quantity}}</p>
+                    <P class="h6">Price: Rs.{{o.total_cost}}0</P>
+                </div>
+                <div class="col-4 fw-bold mt-4">
+                    <p>Order Status: {{o.status}}</p>
+                    {% if o.status == 'Accepted' %}
+                    <div class="progress">
+                       <div class="progress-bar bg-secondary" style="width:20%;"></div>
+                    </div>
+                    {% elif o.status == 'Packed' %}
+                    <div class="progress">
+                       <div class="progress-bar bg-warning" style="width:40%;"></div>
+                    </div>
+                    {% elif o.status == 'On_the_way' %}
+                    <div class="progress">
+                       <div class="progress-bar bg-primary" style="width:60%;"></div>
+                    </div>
+                    {% elif o.status == 'Delivered' %}
+                    <div class="progress">
+                       <div class="progress-bar bg-success" style="width:100%;"></div>
+                    </div>
+                    {% elif o.status == 'Cancel' %}
+                    <div class="progress">
+                       <div class="progress-bar bg-danger" style="width:100%;"></div>
+                    </div>
+                    {% else %}
+                    <div class="progress">
+                       <div class="progress-bar bg-info" style="width:10%;"></div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+{% endblock maincontent %}

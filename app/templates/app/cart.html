@@ -1,0 +1,73 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+
+<h2 class="text-center my-5 pt-5"> Shopping Cart</h2>
+<div class="container ">
+    <div class="row my-5 justify-content-evenly ">
+        <div class="col-7 border border-bottom-0">
+            <h4 class="mt-3">Cart</h4>
+            <div class="row ">
+                {% for cart in carts %}
+                <div class="col-3 ">
+                    
+                    <img src="{{cart.product.product_img.url}}" alt="" srcset="" style="width: 100px; height: 100px;display: block; margin-left: auto; margin-right: auto;" class="border mt-4 shadow">
+                    
+                </div>   
+                <div class="col-9 my-3 ">
+                    <h6 class="">Product {{forloop.counter}}</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, alias?</p>
+                    <div>
+                        <label for="quantity">Quantity:</label>
+                        <a class="minus-cart btn" pid='{{cart.product.id}}'><i class="fas fa-minus-square fa-lg"></i></a>
+                        <span id='quantity'>{{cart.quantity}}</span>
+                        <a class="plus-cart btn" pid='{{cart.product.id}}'><i class="fas fa-plus-square fa-lg"></i></a>
+                        <div class="d-flex justify-content-between mt-5">
+                            <a href="" class="btn btn-secondary btn-sm pt-2 remove" pid='{{cart.product.id}}'>Remove Item </a>
+                            <p class="text-muted">{{cart.product.discount_price}}0 </p>
+                        </div>
+                   </div>  
+                 </div>        
+               <hr>     
+              {% endfor %}
+                
+            </div>
+        
+        </div>
+
+        <div class="col-4  ">
+            <div class="row ">
+                <div class="col-10 border offset-2  ">
+                    <h4 class="mt-3">The Total Amount Of</h4>
+                   
+                        <div class="row ">
+                            <div class="col justify-content-between d-flex">
+                                <p>Amount</p>
+                                 <p id='amount'>{{amount}}0</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col justify-content-between d-flex">
+                                <p>Shipping</p>
+                                <p>70.00</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col justify-content-between d-flex fw-bold">
+                                <p>Total <span class="text-muted">(include GST)</span></p>
+                                <p id='totalamount'>{{totalamount}}0</p>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col">
+                                <a href="{% url 'placeorder' %}" class="btn btn-primary d-block ml-auto mr-auto my-3"> Place Order</a>
+                            </div>
+                        </div> 
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}

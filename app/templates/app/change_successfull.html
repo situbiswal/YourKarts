@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container">
+    <div class="row">
+        <div class="col-5 my-5">
+         <h3>Welcome {{request.user}}</h3>
+         <a href="" class="btn btn-primary"> Password Change Done</a>
+        </div>
+        <div class="col-7 my-5">
+           <img src="{% static 'app/image/password.png' %}" alt="" srcset="" class="w-100% h-200" >
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}

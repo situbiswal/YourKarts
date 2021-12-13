@@ -1,0 +1,30 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-3  my-5">
+         <h3>Welcome {{request.user}}</h3>
+         <div class="d-flex flex-column">
+            <a href="" class="btn {{primary}} my-4">Profile</a>
+            <a href="{% url 'address' %}" class="btn border">Address</a>
+         </div>
+        </div>
+        <div class="col-4 my-5 offset-2">
+           <form class="form-group" action="" method="POST" novalidate>
+            {% csrf_token %}
+            {% for fm in form %} 
+            <div class="form-group"> {{fm.label_tag}}{{fm}} <span class="text-danger">{{fm.errors|striptags}}</span> </div>
+            
+            {% endfor %} 
+            <input type="submit" value="Save"class="btn btn-primary mt-3">
+            {% if form.non_field_errors %}
+            {% for error in  form.non_field_errors %}
+            <p class="alert alert-danger my-5">{{error}}</p>
+            {% endfor %} 
+            {% endif %}
+           </form>
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}

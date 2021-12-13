@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-2 my-5 position-fixed">
+            <ul class="list-group fw-bold">
+                <a href="{% url 'allmobile'  %}"  class="list-group-item  ">All Mobiles</a >
+                <a href="{% url 'mobile' 'realme' %}"  class="list-group-item">Realme</a >
+                <a href="{% url 'mobile' 'mi' %}"  class="list-group-item">Mi</a >
+                <a href="{% url 'mobile' 'samsung' %}"  class="list-group-item">Samsung</a >
+                <a href="{% url 'mobile' 'above' %}"  class="list-group-item">Above 15000</a >
+                <a href="{% url 'mobile' 'below' %}"  class="list-group-item">Below 15000</a >    
+            </ul>
+        </div>
+        <div class="col-9 my-5 offset-3">
+            <div class="row ">
+        
+                {% for m in mobiles %}
+                <div class="col-3 ">
+                    <a href="{% url 'product_details' m.id %}">
+                        <img src="{{m.product_img.url}}" alt="" srcset="" style="height: 220px; width: 50%; display: block;margin-left: auto;margin-right: auto;" >
+                    </a>
+                    <p class="fw-bold text-center mb-0">{{m.title}}</p>
+                    <p class="text-center mb-5">Rs.{{m.discount_price}}</p>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}

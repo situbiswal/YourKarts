@@ -1,0 +1,53 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container pt-5">
+    <div class="row my-5 justify-content-around">
+        <div class="col-5 bg-grey shadow mt-4">
+        <img src="{{products.product_img.url}}" alt="" srcset="" style="width: 80%; height: 550px; display:block; margin:auto; ">
+        </div>
+        <div class="col-5 ">
+            <h2>
+                Product Title: {{products.title}}<hr>
+            </h2>
+            <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem ipsa blanditiis dignissimos commodi cumque, sunt mollitia iste a delectus porro alias amet quibusdam non nemo enim quis animi ad ipsum harum ea quasi. Asperiores soluta quos ab laudantium possimus porro!</p>
+            <h5 class="mb-4">Rs.{{products.discount_price}} <s class="text-muted h5">{{products.selling_price}}</s></h5>
+            {% if request.user.is_authenticated %}
+                {% if item_alredy_in_cart %}
+                    <div class="mb-5">
+                        <form action="/cart" class="d-inline">
+                            <input type="hidden" name="product_id" value="{{products.id}}" id="product_id">
+                            <button type="submit" class="btn btn-warning px-5 ">Go to Cart</button>
+                        </form>
+                        <a href="{% url 'placeorder' %}" class="btn btn-danger mx-3 px-5 ">Buy Now</a>
+                    </div>
+                {% else %}
+                    <div class="mb-5">
+                        <form action="/add_to_cart" class="d-inline">
+                            <input type="hidden" name="product_id" value="{{products.id}}" id="product_id">
+                            <button type="submit" class="btn btn-primary px-5 ">Add to Cart</button>
+                        </form>
+                        <a href="{% url 'placeorder' %}" class="btn btn-danger mx-3 px-5 ">Buy Now</a>
+                    </div>
+                {% endif%}
+            {% else %}  
+                <div class="mb-5">
+                    <form action="/add_to_cart" class="d-inline">
+                        <input type="hidden" name="product_id" value="{{products.id}}" id="product_id">
+                        <button type="submit" class="btn btn-primary px-5 ">Add to Cart</button>
+                    </form>
+                    <a href="{% url 'placeorder' %}" class="btn btn-danger mx-3 px-5 ">Buy Now</a>
+                </div>
+            {% endif%}    
+            <h5>Available Offers</h5>
+            <ul>
+                <li>Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit Card</li>
+                <li>Bank OfferFlat ₹75 discount on UPI transaction above ₹10,000 in a single cart value</li>
+                <li>Partner OfferGST Invoice Available! Save up to 28% for business purchases</li>
+                <li>Bank OfferFlat ₹75 discount on RuPay transaction above ₹7,500/- in a single cart value.</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}

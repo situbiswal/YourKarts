@@ -1,0 +1,30 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-2 my-5 position-fixed">
+            <ul class="list-group fw-bold">
+                <a href="{% url 'bottomwear'  %}"  class="list-group-item  ">Bottom wear</a >
+                <a href="{% url 'topwear' 'topwear' %}"  class="list-group-item">Top Wear</a >
+                
+            </ul>
+        </div>
+        <div class="col-9 my-5 offset-3">
+            <div class="row ">
+        
+                {% for m in mens %}
+                <div class="col-4 ">
+                    <a href="{% url 'product_details' m.id %}">
+                        <img src="{{m.product_img.url}}" alt="" srcset="" style="height: 300px; width: 80%; display: block;margin-left: auto;margin-right: auto;" >
+                    </a>
+                    <p class="fw-bold text-center mb-0">{{m.title}}</p>
+                    <p class="text-center mb-5">Rs.{{m.discount_price}}</p>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}

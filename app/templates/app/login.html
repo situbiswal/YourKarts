@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container mt-5">
+   
+    <div class="row ">
+        
+        <div class="col-6 offset-3 shadow my-5 px-5">
+            <h2 class="text-center my-5">User-Login</h2>
+            <form action="" method="POST" novalidate >
+               
+                {% csrf_token %}
+                {% for fm in form %}
+                <div class=" row form-group ">
+                 <div class="col-5 offset-1 my-2 fw-bolder "> {{fm.label_tag}}</div>
+                 <div class="col-6 my-2 ">{{fm}} 
+                     <p class="text-danger">{{fm.errors|striptags}}</p></div>
+                </div>
+                {% endfor %}
+
+                 <a href="{% url 'restepassword' %}"  class="text-end  mb-5 d-block">Forgot Password ?</a>
+                 {% if form.non_field_errors %}
+                 {% for error in form.non_field_errors %}
+                 <p class="alert alert-danger">{{error}}</p>
+                 {% endfor %}
+                 {% endif %}
+                <div class="row justify-content-center pb-5 ">
+                    <div class="col-2 offset-2">
+                        <input type="submit" value="Login" class="btn btn-danger ">
+                        
+                    </div>
+                    <div class="col-4 mt-2 ">
+                        <h6><a href="{% url 'signup' %}" class="text-primary fw-bold "style="text-decoration: none;">New Users ?</a></h6>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}

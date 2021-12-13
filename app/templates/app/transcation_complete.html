@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container pt-5">
+    <h3 class="pt-5 text-center">Thank you {{request.user}}!! Continue Sohpping <a href="{% url 'order_status' %}">Track Orders</a></h3>
+    <div class="row justify-content-center">
+        <img class="mb-5" src="{% static 'app/image/tra.png' %}" alt="" srcset="" style="height: 500px;width: 500px;">
+    </div>
+</div>
+{% endblock maincontent %}

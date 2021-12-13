@@ -1,0 +1,75 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="mt-5">
+    <img src="{% static 'app/image/b4.jpg' %}" alt="banner" srcset="" height="550px" width="100%" >
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col bg-danger mx-5 py-5 text-light text-center">
+            <h2 id="h2">SALE IS LIVE NOW </h2>
+            <p class="mb-0" style="font-size: 15px;"> 5% Instant Discount on Axis Bank Credit Card and Debit Card    </p>
+            <p style="font-size: 15px;"> Terms and Condition Applied ( For Details Visit Bank   Official Website )</p>
+        </div>
+    </div>
+    <h4 class="my-4">Shopping Deals Of Top Wears</h4>
+    <div class="row justify-content-evenly ">
+        
+        {% for b in bottom_wears %}
+        <div class="col-2">
+            <a href="{% url 'product_details' b.id %}">
+                <img src="{{b.product_img.url}}" alt="" srcset="" style="height: 220px; width: 100%;">
+            
+            </a>
+            <p class="fw-bold text-center">{{b.title}}</p>
+            <p class="text-center">Rs.{{b.discount_price}}</p>
+            
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row  my-5 g-3 justify-content-center">
+        <div class="col-2 border  ">
+            <img src="{% static 'app/image/bj.jpg' %}" alt="" srcset="" style="height: 100px; width: 100%;">
+         </div>
+         <div class="col-2  border mx-3">
+             <img src="{% static 'app/image/cc.jpg' %}" alt="" srcset="" style="height: 100px; width: 100%;">
+          </div>
+          <div class="col-2  border">
+             <img src="{% static 'app/image/nb.jpg' %}" alt="" srcset="" style="height: 100px; width: 100%;">
+          </div>
+          <div class="col-2  border mx-3">
+             <img src="{% static 'app/image/upi.jpg' %}" alt="" srcset="" style="height: 100px; width: 100%;">
+          </div>
+    </div>
+    <h4 class="my-4">Shopping Deals Of Bottom Wears</h4>
+    <div class="row justify-content-evenly ">
+        
+        {% for t in top_wears %}
+        <div class="col-2">
+            <a href="{% url 'product_details' t.id %}">
+                <img src="{{t.product_img.url}}" alt="" srcset="" style="height: 220px; width: 100%;">
+            </a>
+            <p class="fw-bold text-center">{{t.title}}</p>
+            <p class="text-center">Rs.{{t.discount_price}}</p>
+            
+        </div>
+        {% endfor %}
+    </div>
+    <h4 class="my-4">All Mobiles</h4>
+    <div class="row ">
+        
+        {% for m in mobiles %}
+        <div class="col-3 ">
+            <a href="{% url 'product_details' m.id %}">
+                <img src="{{m.product_img.url}}" alt="" srcset="" style="height: 220px; width: 50%; display: block;margin-left: auto;margin-right: auto;" >
+            </a>
+            <p class="fw-bold text-center mb-0">{{m.title}}</p>
+            <p class="text-center mb-5">Rs.{{m.discount_price}}</p>
+            
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock maincontent %}

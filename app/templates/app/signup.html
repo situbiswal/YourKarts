@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block maincontent %}
+<div class="container mt-5">
+    <div class="row my-5  ">
+        
+        <div class="col ">
+            <div class="row bg-light shadow mt-5 py-5">
+                <h2 class=" mb-5 text-center">Registration</h2>
+                <form action=" " method="POST" novalidate>
+                    {% csrf_token %}
+                    <div class="col-6">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="alert alert-success my-3">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    </div>
+                    {% for fm in form %}
+                   <div class="form-group d-flex justify-content-center">
+                    <div class="col-3 my-2 fw-bolder "> {{fm.label_tag}}</div>
+                    <div class="col-3 my-2 ">{{fm}} 
+                        <p class="text-danger">{{fm.errors|striptags}}</p></div>
+                   </div>
+                   
+                    {% endfor %}
+                    
+                    {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                    <p class="alert alert-danger my-3">{{error}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="col-6   mt-3 offset-5">
+                        <input type="submit" value="Signup" class="btn btn-primary  ">
+                        <a href="{% url 'login' %}" class="mx-3 text-danger fw-bold" style="text-decoration: none;">Already signed up? Log in</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock maincontent %}
