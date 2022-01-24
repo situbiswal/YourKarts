@@ -10,7 +10,7 @@ from django.views.decorators.cache import cache_control
 
 
 # Create your views here.
-@cache_control(no_cache=True, must_revalidate=True)
+
 def home(request):
     bottom_wear=Product.objects.filter(category='BW')
     top_wear=Product.objects.filter(category='TW')
@@ -51,8 +51,11 @@ def user_login(request):
 
 
 def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect('/login/')
+    if request.user.is_authenticated:
+        logout(request)
+        return HttpResponseRedirect('/login/')
+    else:
+        return HttpResponseRedirect('/')
 
 def product_details(request,pk):
     product=Product.objects.get(pk=pk)
@@ -71,7 +74,7 @@ def mobile(request,data=None):
         mobile=Product.objects.filter(category='M').filter(discount_price__gt=15000)
     elif data == "below":
         mobile=Product.objects.filter(category='M').filter(discount_price__lt=15000)      
-    return render(request,'avpp/allmobile.html',{'mobiles':mobile}) 
+    return render(request,'app/allmobile.html',{'mobiles':mobile}) 
 
 
 def men(request,data=None):
