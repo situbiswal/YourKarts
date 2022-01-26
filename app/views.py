@@ -5,8 +5,9 @@ from .models import Product,Cart,Customer,OrderPlaced
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 from django.views.decorators.cache import cache_control
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -19,7 +20,7 @@ def home(request):
     if request.user.is_authenticated:
         totalitem=len(Cart.objects.filter(user=request.user))
     return render(request,'app/home.html',{'bottom_wears':bottom_wear,'top_wears':top_wear,'mobiles':mobile,'totalitem':totalitem })
-
+@csrf_exempt
 def signup(request):
     if request.method == 'POST':
         form=SignupForm(request.POST)
@@ -31,7 +32,7 @@ def signup(request):
         form=SignupForm()
     return render(request,'app/signup.html',{'form':form})
 
-
+@csrf_exempt
 def user_login(request):
     if request.method == 'POST':
         form=LoginForm(request=request,data=request.POST)
@@ -84,7 +85,7 @@ def men(request,data=None):
         mens=Product.objects.filter(category='TW')
     return render(request,'app/mens.html',{'mens':mens})
 
-
+@csrf_exempt
 def change_password(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -99,7 +100,7 @@ def change_password(request):
         return render(request,'app/change_password.html',{'form':form})
     else:
         return HttpResponseRedirect('/login/')
-
+@csrf_exempt
 def profile(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
