@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-
+from django.core.wsgi import get_wsgi_application
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,18 +22,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY ='&v-i=rrr(2yb%(m_pb@rxp7t$w&sxvpf3@sv&$ip^g94qp8-hi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
-ALLOWED_HOSTS = ["yourcarts.herokuapp.com","localhost"]
-CSRF_TRUSTED_ORIGINS = ['yourcarts.herokuapp.com']
+ALLOWED_HOSTS = []
+#CSRF_TRUSTED_ORIGINS = ['yourcarts.herokuapp.com']
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'debug_toolbar',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,4 +129,4 @@ MEDIA_ROOT=BASE_DIR/'media'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 STATIC_ROOT=BASE_DIR / 'static'
-CSRF_COOKIE_DOMAIN='yourcarts.herokuapp.com'
+#CSRF_COOKIE_DOMAIN='yourcarts.herokuapp.com'
